@@ -1,0 +1,10 @@
+- name Add nginx repository
+  apt_repository repo='ppanginxstable'
+
+- name Install nginx
+  action apt pkg=nginx-extras state=installed update_cache=true
+
+- name Disable default site
+  file 
+    path etcnginxsites-enableddefault
+    state absent

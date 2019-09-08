@@ -1,0 +1,7 @@
+- name: Dow Docker yml
+  get_url:
+    url: "{{ download_url }}"
+    dest: "/home/my_project_1/docker-compose.yml"
+
+- name: run docker file
+  shell: "ansible-playbook -i hosts /home/my_project_1/docker-compose.yml -kK"

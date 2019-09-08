@@ -1,0 +1,59 @@
+version: '2'
+
+services:
+
+  #CSM №1 wordpress + DB
+  wordpress1:
+    image: wordpress
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: db1
+      WORDPRESS_DB_USER: guerdwordpress
+      WORDPRESS_DB_PASSWORD: guerdwordpress_1
+      WORDPRESS_DB_NAME: exampledb_1
+
+  db1:
+    image: mysql:5.7.27
+    restart: always
+    ports:
+      - 13337:3306
+    environment:
+      MYSQL_DATABASE: exampledb_1
+      MYSQL_USER: guerdwordpress
+      MYSQL_PASSWORD: guerdwordpress_1
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+ 
+  #CSM №2 wordpress + DB
+  wordpress2:
+    image: wordpress
+    restart: always
+    ports:
+      - 8081:80
+    environment:
+      WORDPRESS_DB_HOST: db2
+      WORDPRESS_DB_USER: guerdwordpress
+      WORDPRESS_DB_PASSWORD: guerdwordpress_2
+      WORDPRESS_DB_NAME: exampledb_2
+
+  db2:
+    image: mysql:5.7.27
+    restart: always
+    ports:
+      - 13338:3306
+    environment:
+      MYSQL_DATABASE: exampledb_2
+      MYSQL_USER: guerdwordpress
+      MYSQL_PASSWORD: guerdwordpress_2
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+
+  #Nginx Service
+  webserver:
+    image: nginx:1.17.3
+    container_name: webserver
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"

@@ -1,0 +1,7 @@
+- hosts: web-php-mysql-word
+  sudo: yes
+  vars:
+    - download_url: "http://sita.net/docker-compose.yml"
+    - wpdirectory: "/var/www"
+  roles:
+  - { role: Docker }

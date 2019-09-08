@@ -1,0 +1,12 @@
+- name: install Mysql
+  apt:
+    pkg: "{{ item }}"
+    update_cache: true
+  with_items:
+    - python-mysqldb
+
+- name: Smena parolia or Fial
+  mysql_user:
+    name: root
+    password: "{{ mysql_root_password}}"
+  ignore_errors: yes

@@ -1,0 +1,22 @@
+- name: apt-get install php7.3 
+  apt: pkg={{ item }}
+  with_items:
+    - php7.3 
+    - php7.3-cli 
+    - php7.3-common
+    - php-pear
+    - php7.3-xml 
+    - php7.3-fpm 
+    - libapache2-mod-php7.3 
+    - php7.3-imagick 
+    - php7.3-recode 
+    - php7.3-tidy 
+    - php7.3-xmlrpc 
+    - php7.3-intl
+	
+- name: change listen socket
+  lineinfile:
+    dest: '/etc/php7/fpm/pool.d/www.conf'
+    insertafter: 'listen = 127.0.0.1:9000'
+    line: 'listen = /var/run/fpm.socket'
+  notify: restart php7-fpm

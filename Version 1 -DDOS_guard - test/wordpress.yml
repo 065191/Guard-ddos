@@ -1,0 +1,15 @@
+- hosts: web-php-mysql-word
+  sudo: yes
+  vars:
+    - mysql_root_password: "ddosguard"
+    - domain: "Luboy.ru"
+    - download_url: "http://wordpress.org/latest.tar.gz"
+    - wpdirectory: "/var/www"
+    - db_name: "wordpress"
+    - db_user: "ddosguard"
+    - db_password: "ddosguard"
+  roles:
+  - { role: nginx }
+  - { role: php7 }
+  - { role: mysql }
+  - { role: wordpress }
